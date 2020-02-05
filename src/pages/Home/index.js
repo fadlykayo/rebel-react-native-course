@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -24,18 +24,21 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Home = props => {
+  const [terserah, setTerserah] = useState('deri');
+
   useEffect(() => {
     props.getPokemon();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Container>
+    <Container terserah={terserah}>
       <View style={Style.container}>
         <Text>Ini Home</Text>
         <Text>Selamat datang {props.email}</Text>
-        <TouchableOpacity onPress={() => props.logout()}>
+        <TouchableOpacity onPress={() => setTerserah('toni')}>
           <Text>Logout</Text>
         </TouchableOpacity>
+        <Text onPress={Actions.register}>to Register</Text>
       </View>
       {props.pokemonData && props.pokemonData.sprites && (
         <View>
